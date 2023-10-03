@@ -161,7 +161,7 @@ public class FighterController : MonoBehaviour
 
             _canJump = false;
             _canAttack = false;
-            _moveDirection.y += jumpForce;
+            _moveDirection.y = jumpForce; // Alternate movement code: Mathf.Sqrt(jumpForce * -2f * Physics.gravity.y);
             _anim.SetBool("IsCrouching", false);
             _anim.SetTrigger("Jump");
         }

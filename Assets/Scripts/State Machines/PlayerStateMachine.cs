@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,6 +13,7 @@ public class PlayerStateMachine : StateMachine
     public float MovementSpeed { get; private set; } = 5f;
     public float JumpForce { get; private set; } = 8f;
     public Transform Facing { get; private set; }
+    public float FacingSign { get; private set; } = 1f;
 
     public Animator anim { get; private set; }
     public CharacterController controller { get; private set; }
@@ -32,14 +34,22 @@ public class PlayerStateMachine : StateMachine
         _players ??= new PlayerStateMachine[2];
         _players[_playerCount - 1] = this;
 
-        if (_playerCount == 1) transform.position = GameObject.Find("Spawn1").transform.position;
+        if (_playerCount == 1)
+        {
+            transform.position = GameObject.Find("Spawn1").transform.position;
+            GameObject.FindGameObjectWithTag("TargetGroup").GetComponent<CinemachineTargetGroup>()
+                .RemoveMember(GameObject.Find("Spawn1").transform);
+        }
         else
         {
             transform.position = GameObject.Find("Spawn2").transform.position;
             transform.eulerAngles = new Vector3(0, -90f, 0);
             _players[0].Facing = _players[1].transform;
             _players[1].Facing = _players[0].transform;
+            GameObject.FindGameObjectWithTag("TargetGroup").GetComponent<CinemachineTargetGroup>()
+                .RemoveMember(GameObject.Find("Spawn2").transform);
         }
+        GameObject.FindGameObjectWithTag("TargetGroup").GetComponent<CinemachineTargetGroup>().AddMember(transform, 1, 0);
 
         SwitchState(new PlayerMoveState(this));
     }
@@ -69,6 +79,7 @@ public class PlayerStateMachine : StateMachine
         _hasFlipped = true;
         transform.eulerAngles = transform.position.z < Facing.position.z ?
             new Vector3(0, 90, 0) : new Vector3(0, -90, 0);
+        FacingSign = transform.position.z < Facing.position.z ? 1 : -1;
         Facing.GetComponent<PlayerStateMachine>().SwitchFacingDirection();
     }
 }

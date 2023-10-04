@@ -23,7 +23,8 @@ public class PlayerMoveState : PlayerBaseState
 
         CalculateMoveDirection();
         Move();
-        stateMachine.anim.SetFloat("WalkDirection", stateMachine.input.actions["Movement"].ReadValue<float>());
+        stateMachine.anim.SetFloat("WalkDirection", 
+            stateMachine.input.actions["Movement"].ReadValue<float>() * stateMachine.FacingSign);
     }
 
     public override void Exit()

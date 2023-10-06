@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class PlayerAttackState : PlayerBaseState
 {
-    public PlayerAttackState(PlayerStateMachine stateMachine) : base(stateMachine)
+    private AttackInfo _attack;
+
+    public PlayerAttackState(PlayerStateMachine stateMachine, AttackInfo attack) : base(stateMachine)
     {
+        _attack = attack;
     }
 
     public override void Enter()
     {
         stateMachine.Velocity.x = 0;
-        stateMachine.anim.SetTrigger("Punch");
+        stateMachine.anim.SetTrigger(_attack.AttackTrigger);
     }
 
     public override void Tick()
@@ -21,6 +24,11 @@ public class PlayerAttackState : PlayerBaseState
 
     public override void Exit()
     {
+        foreach (var playerCollisionDetection in stateMachine.GetComponentsInChildren<PlayerCollisionDetection>())
+        {
+            playerCollisionDetection.Reset();
+        }
+
         return;
     }
 }

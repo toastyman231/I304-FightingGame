@@ -7,9 +7,11 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(PlayerInput))]
-public class PlayerStateMachine : StateMachine
+public class PlayerStateMachine : StateMachine, IDamageable
 {
     public Vector3 Velocity;
+    public bool IFrame = false;
+    public AttackInfo[] attacks;
     public float MovementSpeed { get; private set; } = 5f;
     public float JumpForce { get; private set; } = 8f;
     public Transform Facing { get; private set; }
@@ -23,6 +25,7 @@ public class PlayerStateMachine : StateMachine
     private static PlayerStateMachine[] _players;
 
     private bool _hasFlipped = false;
+    private bool _isCrouching = false;
 
     private void Start()
     {
@@ -56,17 +59,49 @@ public class PlayerStateMachine : StateMachine
 
     private void OnVertical()
     {
-        if (controller.isGrounded)
-            SwitchState(new PlayerJumpState(this));
+        if (!controller.isGrounded) return;
+
+        float verticalValue = input.actions["Vertical"].ReadValue<float>();
+        if (verticalValue > 0)
+        {
+            if (_isCrouching)
+            {
+                _isCrouching = false;
+                anim.SetBool("IsCrouching", false);
+                SwitchState(new PlayerMoveState(this));
+            }
+            else
+            {
+                _isCrouching = false;
+                SwitchState(new PlayerJumpState(this));
+            }
+        } else if (verticalValue < 0)
+        {
+            if (_isCrouching) return;
+
+            _isCrouching = true;
+            SwitchState(new PlayerCrouchState(this));
+        }
     }
 
     private void OnPunch()
     {
         if (GetCurrentState().GetType() == typeof(PlayerMoveState))
-            SwitchState(new PlayerAttackState(this));
+            SwitchState(new PlayerAttackState(this, attacks[0]));
+    }
+
+    private void OnKick()
+    {
+        if (GetCurrentState().GetType() == typeof(PlayerMoveState))
+            SwitchState(new PlayerAttackState(this, attacks[1]));
     }
 
     public void StopAttack()
+    {
+        SwitchState(new PlayerMoveState(this));
+    }
+
+    public void EndDamageState()
     {
         SwitchState(new PlayerMoveState(this));
     }
@@ -81,5 +116,28 @@ public class PlayerStateMachine : StateMachine
             new Vector3(0, 90, 0) : new Vector3(0, -90, 0);
         FacingSign = transform.position.z < Facing.position.z ? 1 : -1;
         Facing.GetComponent<PlayerStateMachine>().SwitchFacingDirection();
+    }
+
+    public void ReceiveDamage(float amount, DamageType damageType)
+    {
+        if (IFrame) return;
+
+        SwitchState(new PlayerDamageState(this, damageType));
+        Debug.Log("Damaged for " + amount);
+    }
+
+    public override void OnAnyStateEnter()
+    {
+        return;
+    }
+
+    public override void OnAnyStateTick()
+    {
+        return;
+    }
+
+    public override void OnAnyStateExit()
+    {
+        return;
     }
 }

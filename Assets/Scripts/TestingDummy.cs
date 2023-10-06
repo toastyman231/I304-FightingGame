@@ -16,7 +16,7 @@ public class TestingDummy : MonoBehaviour, IDamageable
         
     }
 
-    public void ReceiveDamage(float amount)
+    public void ReceiveDamage(float amount, DamageType damageType)
     {
         Debug.Log("Hit for " + amount + " damage!");
     }

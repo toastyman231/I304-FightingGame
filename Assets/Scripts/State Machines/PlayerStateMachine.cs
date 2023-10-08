@@ -9,6 +9,8 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerInput))]
 public class PlayerStateMachine : StateMachine, IDamageable
 {
+    public float Health;
+    public float MaxHealth = 100f;
     public Vector3 Velocity;
     public bool IFrame = false;
     public AttackInfo[] attacks;
@@ -37,15 +39,23 @@ public class PlayerStateMachine : StateMachine, IDamageable
         _players ??= new PlayerStateMachine[2];
         _players[_playerCount - 1] = this;
 
-        if (_playerCount == 1)
+        Health = MaxHealth;
+        FighterUIController.InvokeHealthChanged((uint)input.playerIndex, Health, MaxHealth);
+
+        Setup();
+
+        SwitchState(new PlayerMoveState(this));
+    }
+
+    private void Setup()
+    {
+        if (input.playerIndex == 0)
         {
-            transform.position = GameObject.Find("Spawn1").transform.position;
             GameObject.FindGameObjectWithTag("TargetGroup").GetComponent<CinemachineTargetGroup>()
                 .RemoveMember(GameObject.Find("Spawn1").transform);
         }
         else
         {
-            transform.position = GameObject.Find("Spawn2").transform.position;
             transform.eulerAngles = new Vector3(0, -90f, 0);
             _players[0].Facing = _players[1].transform;
             _players[1].Facing = _players[0].transform;
@@ -53,8 +63,6 @@ public class PlayerStateMachine : StateMachine, IDamageable
                 .RemoveMember(GameObject.Find("Spawn2").transform);
         }
         GameObject.FindGameObjectWithTag("TargetGroup").GetComponent<CinemachineTargetGroup>().AddMember(transform, 1, 0);
-
-        SwitchState(new PlayerMoveState(this));
     }
 
     private void OnVertical()
@@ -122,8 +130,9 @@ public class PlayerStateMachine : StateMachine, IDamageable
     {
         if (IFrame) return;
 
+        Health = Mathf.Clamp(Health - amount, 0, MaxHealth);
+        FighterUIController.InvokeHealthChanged((uint)input.playerIndex, Health, MaxHealth);
         SwitchState(new PlayerDamageState(this, damageType));
-        Debug.Log("Damaged for " + amount);
     }
 
     public override void OnAnyStateEnter()

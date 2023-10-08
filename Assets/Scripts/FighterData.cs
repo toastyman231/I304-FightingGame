@@ -7,7 +7,7 @@ public class FighterData : ScriptableObject
 {
     public string FighterName;
 
-    public Texture2D FighterImage;
+    public Sprite FighterImage;
 
     public GameObject FighterPrefab;
 

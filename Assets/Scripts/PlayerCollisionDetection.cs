@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerCollisionDetection : MonoBehaviour
 {
+    [SerializeField] private AttackInfo attack;
     [SerializeField] private int numHits = 1;
     [SerializeField] private int[] maxHitsPerHit;
 
@@ -31,7 +32,7 @@ public class PlayerCollisionDetection : MonoBehaviour
         {
             if (i < 0 || i > damageables.Length - 1) break;
 
-            damageables[i].ReceiveDamage(10, damageType);
+            damageables[i].ReceiveDamage(attack.AttackDamage, damageType);
         }
 
         _currentHit++;

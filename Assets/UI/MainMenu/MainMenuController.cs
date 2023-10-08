@@ -43,6 +43,8 @@ public class MainMenuController : MonoBehaviour
 
             var fighter = fighters.Fighters[index];
             selector.Q<Label>().text = fighter.FighterName;
+            selector.Q<VisualElement>("FighterIcon").style.backgroundImage = new StyleBackground(fighter.FighterImage);
+            index++;
         }
 
         MoveSelection += OnMoveSelection;

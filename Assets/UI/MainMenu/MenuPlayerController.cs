@@ -92,7 +92,7 @@ public class MenuPlayerController : MonoBehaviour
 
         foreach (var player in players)
         {
-            _selectedFighters.Fighters.Add(player._fighters.Fighters[_selection]);
+            _selectedFighters.Fighters.Add(player._fighters.Fighters[player._selection]);
         }
 
         SceneManager.LoadScene((int)Scenes.DEMO, LoadSceneMode.Single);

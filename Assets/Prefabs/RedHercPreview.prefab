@@ -243,11 +243,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3780585344269616168}
   - component: {fileID: 7035379565559155640}
-  - component: {fileID: 4326355780663897003}
-  - component: {fileID: 2642468342171467506}
-  - component: {fileID: 4427316226006532924}
   m_Layer: 0
-  m_Name: Herc 2.0
+  m_Name: RedHercPreview
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -292,82 +289,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4326355780663897003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 889141206099909181}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 5e71d3a4c12d0fd468855a129209f2f1,
-    type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Gameplay
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
---- !u!143 &2642468342171467506
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 889141206099909181}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 73
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 128
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 2.8
-  m_Radius: 0.53
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1.47, z: 0}
---- !u!114 &4427316226006532924
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 889141206099909181}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52aa6a80048f6cf4d9dbade4785ac0ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Health: 0
-  MaxHealth: 100
-  Velocity: {x: 0, y: 0, z: 0}
-  IFrame: 0
-  attacks:
-  - {fileID: 11400000, guid: 73c9b231397248442bff720252eb65e9, type: 2}
-  - {fileID: 11400000, guid: a6ea33761dccef047bdb7df29b656152, type: 2}
 --- !u!1 &938119645123030067
 GameObject:
   m_ObjectHideFlags: 0
@@ -2200,7 +2121,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: df76d43f238f15845a54fe6ebd0db120, type: 3}
+  - {fileID: 2100000, guid: d2a12c9bda142fe498c32487838e1e47, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

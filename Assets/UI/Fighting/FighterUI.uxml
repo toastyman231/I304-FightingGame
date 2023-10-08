@@ -1,0 +1,19 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Fighting/FighterUIStyle.uss?fileID=7433441132597879392&amp;guid=bc4b9efa740f7944191530bd3ee6c15b&amp;type=3#FighterUIStyle" />
+    <ui:VisualElement name="Root" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); flex-direction: row; align-items: stretch; justify-content: flex-start;">
+        <ui:VisualElement name="Fighter1Root" class="fighter-root" style="flex-direction: row; flex-grow: 1;">
+            <ui:VisualElement name="FighterInfo">
+                <ui:VisualElement name="Fighter1Icon" class="icon" />
+                <ui:Label tabindex="-1" text="Label" display-tooltip-when-elided="true" name="Fighter1Name" class="name" />
+            </ui:VisualElement>
+            <CustomProgressBar border-color="#000000FF" border-radius="5" value="0.4" name="Fighter1Health" background-color="#353535FF" style="flex-grow: 1; margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 5px;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Fighter2Root" class="fighter-root" style="flex-direction: row-reverse; flex-grow: 1;">
+            <ui:VisualElement name="FighterInfo">
+                <ui:VisualElement name="Fighter2Icon" class="icon" />
+                <ui:Label tabindex="-1" text="Label" display-tooltip-when-elided="true" name="Fighter2Name" class="name" style="-unity-text-align: upper-right;" />
+            </ui:VisualElement>
+            <CustomProgressBar width="300" fill-type="RightToLeft" value="0.48" name="Fighter2Health" background-color="#353535FF" style="flex-grow: 1; margin-left: 5px; margin-right: 5px; margin-top: 5px; margin-bottom: 5px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

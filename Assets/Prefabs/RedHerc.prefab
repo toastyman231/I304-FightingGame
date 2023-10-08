@@ -247,7 +247,7 @@ GameObject:
   - component: {fileID: 2642468342171467506}
   - component: {fileID: 4427316226006532924}
   m_Layer: 0
-  m_Name: Herc 2.0
+  m_Name: RedHerc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2200,7 +2200,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3846018093981099296, guid: df76d43f238f15845a54fe6ebd0db120, type: 3}
+  - {fileID: 2100000, guid: d2a12c9bda142fe498c32487838e1e47, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

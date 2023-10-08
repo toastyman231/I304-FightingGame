@@ -1,0 +1,22 @@
+.fighter-root {
+    flex-grow: 0;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.icon {
+    background-color: rgb(255, 255, 255);
+    width: 80px;
+    height: 80px;
+}
+
+.name {
+    width: 100%;
+    color: rgb(255, 255, 255);
+}
+
+.health {
+    flex-grow: 1;
+}

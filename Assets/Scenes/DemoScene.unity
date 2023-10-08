@@ -987,6 +987,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1948833996}
   - component: {fileID: 1948833995}
+  - component: {fileID: 1948833997}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -1009,7 +1010,7 @@ MonoBehaviour:
   m_NotificationBehavior: 0
   m_MaxPlayerCount: 2
   m_AllowJoining: 1
-  m_JoinBehavior: 0
+  m_JoinBehavior: 2
   m_PlayerJoinedEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -1019,10 +1020,10 @@ MonoBehaviour:
   m_JoinAction:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Join
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: 1d1a921d-79f5-442e-8107-ad00298344fa
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -1054,6 +1055,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1948833997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1948833994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a904af98bf73c774386fe8d57459b25c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _selectedFighters: {fileID: 11400000, guid: 84c676df34f33e844bea2484c1717868, type: 2}
 --- !u!1 &1962985030
 GameObject:
   m_ObjectHideFlags: 0

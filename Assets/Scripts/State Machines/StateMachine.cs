@@ -22,7 +22,7 @@ public abstract class StateMachine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _currentState.Tick();
+        _currentState?.Tick();
         OnAnyStateTick();
     }
 

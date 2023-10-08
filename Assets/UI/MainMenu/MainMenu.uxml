@@ -1,0 +1,17 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="FighterSelector" src="project://database/Assets/UI/MainMenu/FighterSelector.uxml?fileID=9197481963319205126&amp;guid=d9c4aa6fd902adc448b9a208cf9ab054&amp;type=3#FighterSelector" />
+    <Style src="project://database/Assets/UI/MainMenu/fighter-selector.uss?fileID=7433441132597879392&amp;guid=8714732a2439ed142a256471407d087a&amp;type=3#fighter-selector" />
+    <ui:VisualElement name="FightersHolder" style="flex-grow: 1; background-color: rgb(46, 46, 46); justify-content: center; align-items: center; width: auto; margin-left: 25%; margin-right: 25%;">
+        <ui:VisualElement name="FightersRow1" style="flex-grow: 1; background-color: rgba(255, 255, 255, 0); width: auto; flex-direction: row; justify-content: space-around; margin-top: 15px; margin-left: 15px; margin-right: 15px; margin-bottom: 15px; align-items: flex-start; align-self: stretch;">
+            <ui:VisualElement name="FighterWrapper" class="fighter-selector" style="align-items: center; height: 200px;">
+                <ui:Instance template="FighterSelector" name="FighterSelector" class="fighter-selector" style="width: 100%; height: 100%;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="FighterWrapper" class="fighter-selector" style="align-items: center;">
+                <ui:Instance template="FighterSelector" name="FighterSelector" class="fighter-selector" style="width: 100%; height: 100%;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="StartPromptHolder" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); justify-content: flex-end; align-items: center; width: 100%; align-self: auto;">
+            <ui:Label tabindex="-1" text="Press X or Space to Begin!" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255);" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

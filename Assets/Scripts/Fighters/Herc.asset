@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db10a4c8322e6714a8d28febc3a0e88e, type: 3}
+  m_Name: Herc
+  m_EditorClassIdentifier: 
+  FighterName: Herc
+  FighterImage: {fileID: 0}
+  FighterPrefab: {fileID: 889141206099909181, guid: 7a6f9959e03735f4d8759baaeed09c51,
+    type: 3}
+  FighterPreview: {fileID: 889141206099909181, guid: e5972a271d22d754c94b0a1f355697e2,
+    type: 3}

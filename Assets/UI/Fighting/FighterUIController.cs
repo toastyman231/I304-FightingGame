@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 public class FighterUIController : MonoBehaviour
 {
     [SerializeField] private FighterList _selectedFighters;
+    [SerializeField] private GameObject _gameOverUI;
 
     private UIDocument _document;
 
@@ -15,6 +16,7 @@ public class FighterUIController : MonoBehaviour
     private CustomProgressBar _p2HealthBar;
 
     public static event Action<uint, float, float> HealthChanged;
+    public static event Action<uint> GameOver;
 
     // Start is called before the first frame update
     void Start()
@@ -34,11 +36,13 @@ public class FighterUIController : MonoBehaviour
             new StyleBackground(_selectedFighters.Fighters[1].FighterImage);
 
         HealthChanged += OnHealthChanged;
+        GameOver += OnGameOver;
     }
 
     private void OnDestroy()
     {
         HealthChanged -= OnHealthChanged;
+        GameOver -= OnGameOver;
     }
 
     private void OnHealthChanged(uint player, float current, float max)
@@ -47,8 +51,21 @@ public class FighterUIController : MonoBehaviour
         healthBar.value = current / max;
     }
 
+    private void OnGameOver(uint victorId)
+    {
+        var victorName = _selectedFighters.Fighters[(int)victorId].FighterName;
+        gameObject.SetActive(false);
+        _gameOverUI.SetActive(true);
+        _gameOverUI.GetComponent<GameOverUIController>().SetupGameOver(victorName);
+    }
+
     public static void InvokeHealthChanged(uint player, float current, float max)
     {
         HealthChanged?.Invoke(player, current, max);
+    }
+
+    public static void InvokeGameOver(uint victorId)
+    {
+        GameOver?.Invoke(victorId);
     }
 }

@@ -16,6 +16,8 @@ public class PlayerMoveState : PlayerBaseState
 
     public override void Tick()
     {
+        if (!stateMachine.hasControl) return;
+
         if (!stateMachine.controller.isGrounded)
         {
             stateMachine.SwitchState(new PlayerFallState(stateMachine));

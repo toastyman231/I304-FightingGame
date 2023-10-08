@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Fighting/GameOverStyle.uss?fileID=7433441132597879392&amp;guid=1609109044e17a141bc9a2ac4fddd187&amp;type=3#GameOverStyle" />
+    <ui:VisualElement name="Screen" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+        <ui:Label tabindex="-1" text="HERC WINS!" display-tooltip-when-elided="true" name="Message" style="flex-grow: 0; -unity-text-align: middle-center; font-size: 200px; margin-top: 15%;" />
+        <ui:Button text="REMATCH" display-tooltip-when-elided="true" name="RematchButton" class="button" />
+        <ui:Button text="NEW FIGHTERS" display-tooltip-when-elided="true" name="NewMatchButton" class="button" style="font-size: 35px;" />
+        <ui:Button text="QUIT" display-tooltip-when-elided="true" name="QuitButton" class="button" />
+    </ui:VisualElement>
+</ui:UXML>

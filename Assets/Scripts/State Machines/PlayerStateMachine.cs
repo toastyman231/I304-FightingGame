@@ -22,6 +22,7 @@ public class PlayerStateMachine : StateMachine, IDamageable
     public Animator anim { get; private set; }
     public CharacterController controller { get; private set; }
     public PlayerInput input { get; private set; }
+    public bool hasControl { get; private set; } = true;
 
     private static uint _playerCount = 0;
     private static PlayerStateMachine[] _players;
@@ -36,15 +37,22 @@ public class PlayerStateMachine : StateMachine, IDamageable
         input = GetComponent<PlayerInput>();
 
         _playerCount++;
+        if (_playerCount > 2) _playerCount = 1;
         _players ??= new PlayerStateMachine[2];
         _players[_playerCount - 1] = this;
 
         Health = MaxHealth;
         FighterUIController.InvokeHealthChanged((uint)input.playerIndex, Health, MaxHealth);
+        FighterUIController.GameOver += OnGameOver;
 
         Setup();
 
         SwitchState(new PlayerMoveState(this));
+    }
+
+    private void OnDestroy()
+    {
+        FighterUIController.GameOver -= OnGameOver;
     }
 
     private void Setup()
@@ -65,9 +73,15 @@ public class PlayerStateMachine : StateMachine, IDamageable
         GameObject.FindGameObjectWithTag("TargetGroup").GetComponent<CinemachineTargetGroup>().AddMember(transform, 1, 0);
     }
 
+    private void OnGameOver(uint victorId)
+    {
+        hasControl = false;
+        input.currentActionMap = input.actions.FindActionMap("Menu", true);
+    }
+
     private void OnVertical()
     {
-        if (!controller.isGrounded) return;
+        if (!controller.isGrounded || !hasControl) return;
 
         float verticalValue = input.actions["Vertical"].ReadValue<float>();
         if (verticalValue > 0)
@@ -94,12 +108,16 @@ public class PlayerStateMachine : StateMachine, IDamageable
 
     private void OnPunch()
     {
+        if (!hasControl) return;
+
         if (GetCurrentState().GetType() == typeof(PlayerMoveState))
             SwitchState(new PlayerAttackState(this, attacks[0]));
     }
 
     private void OnKick()
     {
+        if (!hasControl) return;
+
         if (GetCurrentState().GetType() == typeof(PlayerMoveState))
             SwitchState(new PlayerAttackState(this, attacks[1]));
     }
@@ -133,6 +151,11 @@ public class PlayerStateMachine : StateMachine, IDamageable
         Health = Mathf.Clamp(Health - amount, 0, MaxHealth);
         FighterUIController.InvokeHealthChanged((uint)input.playerIndex, Health, MaxHealth);
         SwitchState(new PlayerDamageState(this, damageType));
+
+        if (Health <= 0)
+        {
+            FighterUIController.InvokeGameOver((input.playerIndex == 0) ? 1U : 0U);
+        }
     }
 
     public override void OnAnyStateEnter()

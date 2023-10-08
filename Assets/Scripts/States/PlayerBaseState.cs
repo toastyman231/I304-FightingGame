@@ -28,6 +28,8 @@ public abstract class PlayerBaseState : State
 
     protected void Move()
     {
+        if (!stateMachine.hasControl) return;
+
         stateMachine.controller.Move(stateMachine.Velocity * Time.deltaTime);
     }
 }
